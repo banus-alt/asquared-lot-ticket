@@ -1,5 +1,4 @@
-[index.html](https://github.com/user-attachments/files/29723959/index.html)
-# asquared-lot-ticket[README.md](https://github.com/user-attachments/files/29723955/README.md)
+[README.md](https://github.com/user-attachments/files/29724442/README.md)
 # Lot Ticket — Daily Ledger
 
 A single-file web app for pricing Pokémon card buy-ins and trades on the fly.
@@ -11,7 +10,8 @@ A single-file web app for pricing Pokémon card buy-ins and trades on the fly.
 
 No build step, no dependencies — it's just `index.html`. Open it directly in a browser or deploy it anywhere that serves static files (GitHub Pages, Vercel, Netlify, etc).
 
-[card_shop_daily_ledger.html](https://github.com/user-attachments/files/29724396/card_shop_daily_ledger.html)
+
+[index.html](https://github.com/user-attachments/files/29724444/index.html)
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +21,6 @@ No build step, no dependencies — it's just `index.html`. Open it directly in a
   @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap');
 
   :root{
-    color-scheme: dark;
     --ink:#1B2430; --ink-2:#242F3F;
     --parchment:#F5EFE1; --parchment-line:#C9BFA6;
     --cash:#3F7859; --cash-dim:#5C8F72;
@@ -36,13 +35,6 @@ No build step, no dependencies — it's just `index.html`. Open it directly in a
 
   section{ background:var(--ink-2); border:1px solid #33405480; border-radius:4px; padding:18px 20px; margin-bottom:18px; }
   section h2{ font-family:'Space Grotesk',sans-serif; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--chalk-dim); margin:0 0 12px; display:flex; align-items:center; gap:8px; }
-
-  .collapsible-section{ background:var(--ink-2); border:1px solid #33405480; border-radius:4px; padding:18px 20px; margin-bottom:18px; }
-  .collapsible-summary{ font-family:'Space Grotesk',sans-serif; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--chalk-dim); display:flex; align-items:center; justify-content:space-between; gap:8px; cursor:pointer; list-style:none; }
-  .collapsible-summary::-webkit-details-marker{ display:none; }
-  .collapsible-section[open] .collapsible-summary{ margin-bottom:12px; }
-  .collapsible-summary .chev{ font-family:'JetBrains Mono',monospace; font-size:14px; transition:transform .15s; }
-  .collapsible-section[open] .collapsible-summary .chev{ transform:rotate(180deg); }
   .h2-cash::before{ content:''; width:4px; height:4px; background:var(--cash-dim); border-radius:50%; }
   .h2-trade::before{ content:''; width:4px; height:4px; background:var(--trade-dim); border-radius:50%; }
   .h2-neutral::before{ content:''; width:4px; height:4px; background:var(--chalk-dim); border-radius:50%; }
@@ -51,7 +43,7 @@ No build step, no dependencies — it's just `index.html`. Open it directly in a
   th{ text-align:left; font-family:'JetBrains Mono',monospace; font-weight:500; font-size:10px; text-transform:uppercase; letter-spacing:.05em; color:var(--chalk-dim); padding:0 6px 6px; border-bottom:1px solid #C9BFA633; }
   td{ padding:4px 6px; vertical-align:middle; }
 
-  input[type=number], input[type=text]{ background:var(--ink); border:1px solid #3A4759; color:var(--chalk); font-family:'JetBrains Mono',monospace; font-size:13px; padding:5px 7px; border-radius:3px; width:100%; -webkit-appearance:none; appearance:none; }
+  input[type=number], input[type=text]{ background:var(--ink); border:1px solid #3A4759; color:var(--chalk); font-family:'JetBrains Mono',monospace; font-size:13px; padding:5px 7px; border-radius:3px; width:100%; }
   input:focus{ outline:none; border-color:var(--cash-dim); }
   .tier-input{ width:64px; }
   .price-input{ width:90px; }
@@ -71,7 +63,7 @@ No build step, no dependencies — it's just `index.html`. Open it directly in a
   .toggle-opt.active-trade{ background:var(--trade); color:var(--chalk); }
 
   .offer-cell{ text-align:center; }
-  .offer-box{ padding:6px 4px; border:1px solid #3A4759; border-radius:3px; font-family:'JetBrains Mono',monospace; font-size:13px; cursor:pointer; color:var(--chalk-dim); background:var(--ink); text-align:center; transition:opacity .1s; }
+  .offer-box{ padding:6px 4px; border:1px solid #3A4759; border-radius:3px; font-family:'JetBrains Mono',monospace; font-size:13px; cursor:pointer; color:var(--chalk-dim); text-align:center; transition:opacity .1s; }
   .offer-box:hover{ opacity:.8; }
   .offer-box.selected-cash{ background:var(--cash); color:var(--chalk); border-color:var(--cash); font-weight:700; }
   .offer-box.selected-trade{ background:var(--trade); color:var(--chalk); border-color:var(--trade); font-weight:700; }
@@ -128,8 +120,8 @@ No build step, no dependencies — it's just `index.html`. Open it directly in a
   <h1>Lot Ticket — Daily Ledger</h1>
   <div class="subtitle">Two-sided transactions · running day totals · end-of-day export</div>
 
-  <details class="collapsible-section" open>
-    <summary class="collapsible-summary"><span class="h2-neutral" style="margin:0;">Tier Table (buy-in only)</span><span class="chev">⌄</span></summary>
+  <section>
+    <h2 class="h2-neutral">Tier Table (buy-in only)</h2>
     <table>
       <thead><tr><th>Min $</th><th>Max $</th><th>Cash %</th><th>Trade %</th><th></th></tr></thead>
       <tbody id="tierBody"></tbody>
@@ -141,7 +133,7 @@ No build step, no dependencies — it's just `index.html`. Open it directly in a
       <span>Cash %</span><input type="text" inputmode="decimal" id="bulkCash" class="tier-input" placeholder="—" style="width:56px;">
       <span>Trade %</span><input type="text" inputmode="decimal" id="bulkTrade" class="tier-input" placeholder="—" style="width:56px;">
     </div>
-  </details>
+  </section>
 
   <section>
     <h2 class="h2-neutral">Current Transaction</h2>
@@ -192,10 +184,10 @@ No build step, no dependencies — it's just `index.html`. Open it directly in a
 
 <script>
 let tiers = [
-  {min:0, max:10, cash:60, trade:65},
-  {min:10.01, max:25, cash:65, trade:70},
-  {min:25.01, max:50, cash:70, trade:75},
-  {min:50.01, max:null, cash:75, trade:80},
+  {min:0, max:10, cash:60, trade:75},
+  {min:10.01, max:25, cash:70, trade:75},
+  {min:25.01, max:149.99, cash:75, trade:80},
+  {min:150, max:null, cash:65, trade:70},
 ];
 let inRows = [], outRows = [], dayTxns = [];
 let inId=0, outId=0, txnId=0;
